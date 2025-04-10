@@ -1,0 +1,101 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Orgánica - Alimentos Orgánicos</title>
+    
+    <!-- Fonts and Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/carrito.css' %}">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: var(--light);">
+        <div class="container">
+            <!-- Brand -->
+            <a class="navbar-brand" href="#">Live <span>Orgánica</span></a>
+            
+            <!-- Toggler -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <!-- Navbar Links -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'index' %}" style="color: var(--dark);">
+                            <i class="fas fa-home"></i> Inicio
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'lista_categorias' %}" style="color: var(--dark);">
+                            <i class="fas fa-list"></i> Categorías
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'productos' %}" style="color: var(--dark);">
+                            <i class="fas fa-shopping-basket"></i> Productos
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'ofertas' %}" style="color: var(--dark);">
+                            <i class="fas fa-tag"></i> Ofertas
+                        </a>
+                    </li>
+                </ul>
+                
+                <!-- Search Form -->
+                <form class="d-flex" method="get" action="{% url 'buscar_productos' %}">
+                    <input class="form-control me-2" type="search" placeholder="Buscar productos..." name="search-input" id="search-input" aria-label="Search">
+                </form>
+                                
+                <!-- User and Cart Icons -->
+                <div class="nav-icons">
+                    <a href="" style="color: var(--dark);">
+                        <i class="fas fa-user"></i>
+                    </a>
+
+                    <div class="nav-icons">
+                        <a href="{% url 'ver_carrito' %}" style="color: var(--dark); text-decoration: none;">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-count">{{ total_productos_en_carrito }}</span>
+                        </a>
+                    
+                        <div class="cart-preview">
+                            <h6>Resumen del carrito</h6>
+                            {% if vista_previa_carrito %}
+                                {% for item in vista_previa_carrito|slice:":3" %}
+                                    <div class="item d-flex align-items-center">
+                                        <img src="{{ item.producto.imagen.url }}" alt="{{ item.producto.nombre }}" style="width: 40px; height: 40px; object-fit: cover; margin-right: 10px;">
+                                        <div>
+                                            <strong>{{ item.producto.nombre }}</strong><br>
+                                            x{{ item.cantidad }} – ${{ item.subtotal }}
+                                        </div>
+                                        <a href="{% url 'eliminar_del_carrito' item.producto.id %}" class="btn btn-sm btn-outline-danger ms-auto" title="Eliminar" style="font-size: 12px;">✖</a>
+                                    </div>
+                                {% endfor %}
+                                <div class="ver-carrito-link">
+                                    <a href="{% url 'ver_carrito' %}">Ver todo</a>
+                                </div>
+                            {% else %}
+                                <p>No hay productos</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</body>
+</html>

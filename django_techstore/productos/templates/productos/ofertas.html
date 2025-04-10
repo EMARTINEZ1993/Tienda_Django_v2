@@ -1,0 +1,43 @@
+{% load static %}
+{% include 'productos/menu.html' %}
+        <!-- Productos en Oferta -->
+        <div class="container mt-4">
+            <h1 class="text-center">Productos en Oferta</h1>
+            <p class="text-center">¡Aprovecha nuestras ofertas especiales!</p>
+        
+        <div class="row">
+            {% for producto in productos_oferta %}
+            <div class="col-md-4">
+                <div class="card">
+                    <a href="{% url 'detalle_producto' producto.id %}">
+                        {% if producto.oferta %}
+                        <span class="badge-offer">Oferta</span>
+                        {% endif %}
+                        <img src="{{ producto.imagen.url }}" class="card-img-top" alt="{{ producto.nombre }}">
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ producto.nombre }}</h5>
+                        <p class="card-text">{{ producto.descripcion }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                {% if producto.precio_anterior %}
+                                <span class="old-price">${{ producto.precio_anterior }}</span>
+                                {% endif %}
+                                <span class="price">${{ producto.precio }}</span>
+                                
+                                <p class="card-text"><strong>Categoría: </strong>
+                                {{ producto.categoria }}</p>
+                            
+                            </div>
+                            <a href="{% url 'agregar_al_carrito' producto.id %}" class="btn btn-sm btn-primary">
+                                <i class="fas fa-plus"></i>Agregar al Carrito
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        </div>
+
+{% include 'productos/footer.html' %}

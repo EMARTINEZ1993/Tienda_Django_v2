@@ -1,0 +1,36 @@
+{% load static %}
+{% include 'productos/menu.html' %}
+
+{% comment %} 
+    Este template muestra los detalles de un producto específico.
+    Se espera que la vista pase un objeto 'producto' al contexto.
+{% endcomment %}
+
+{% if not producto %}
+    <div class="container">
+        <h1>Producto no encontrado</h1>
+        <p>Lo sentimos, el producto que buscas no está disponible.</p>
+    </div>
+{% endif %}
+    
+    {% if producto %}
+        <div class="container">
+            <h1>{{ producto.nombre }}</h1>
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" class="img-fluid">
+                </div>
+                <div class="col-md-6">
+                    <h2>Descripción</h2>
+                    <p>{{ producto.descripcion }}</p>
+                    <p><strong>Categoría: </strong>{{ producto.categoria }}</p>
+                    <p><strong>Precio: </strong>${{ producto.precio }}</p>
+                    <a href="{% url 'agregar_al_carrito' producto.id %}" class="btn btn-sm btn-primary">
+                        <i class="fas fa-plus"></i>Agregar al Carrito
+                    </a>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+{% include 'productos/footer.html' %}

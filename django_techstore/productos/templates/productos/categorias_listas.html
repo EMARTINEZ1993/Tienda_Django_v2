@@ -1,0 +1,20 @@
+ <div class="container mt-4">
+        <!-- Categorías -->
+        <h2>Nuestras Categorías</h2>
+        <div class="row">
+            {% for categoriax in categorias %}
+            <div class="col-md-3">
+                <div class="card">
+                    <a href="">
+                        <img src="{{ categoriax.imagen.url }}" class="card-img-top" alt="{{ categoriax.nombre }}">
+                        <div class="card-body text-center">
+                            <a href="{% url 'categoria' categoriax.id %}">
+                            <h5 class="card-title">{{ categoriax.nombre }}</h5>
+                            </a>
+                            <p class="card-text">{{ categoriax.descripcion }}</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>

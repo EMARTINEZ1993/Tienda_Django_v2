@@ -1,0 +1,52 @@
+{% load static %}
+{% include 'productos/menu.html' %}
+
+<div class="container mt-4">
+    
+    <h2>Tu Carrito</h2>
+    
+    {% if carrito_items %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio Unitario</th>
+                <th>Subtotal</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in carrito_items %}
+            <tr>
+                <td>{{ item.producto.nombre }}</td>
+                <td>
+                    <div class="d-flex align-items-center">
+                        <a href="{% url 'disminuir_cantidad' item.producto.id %}" class="btn btn-sm btn-outline-secondary me-1">-</a>
+                        <span>{{ item.cantidad }}</span>
+                        <a href="{% url 'aumentar_cantidad' item.producto.id %}" class="btn btn-sm btn-outline-secondary ms-1">+</a>
+                    </div>
+                </td>
+                <td>${{ item.producto.precio }}</td>
+                <td>${{ item.subtotal }}</td>
+
+                <td>
+                    <a href="{% url 'eliminar_del_carrito' item.producto.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    
+    <h4>Total: ${{ total }}</h4>
+    
+    <a href="{% url 'vaciar_carrito' %}" class="btn btn-warning">Vaciar carrito</a>
+    
+    {% else %}
+    <p>Tu carrito está vacío.</p>
+    {% endif %}
+    
+
+</div>    
+{% include 'productos/footer.html' %}

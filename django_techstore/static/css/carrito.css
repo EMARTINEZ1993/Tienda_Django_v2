@@ -1,0 +1,93 @@
+.nav-icons:hover > .cart-preview {
+    display: block !important;
+}
+/* Estilos para el carrito de compras */
+.cart-preview {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 300px;
+    background-color: white;
+    border: 1px solid #ccc;
+    z-index: 1000;
+    display: none;
+    padding: 10px;
+}
+
+.nav-icons:hover .cart-preview {
+    display: block;
+}
+
+.nav-icons {
+    position: relative;
+}
+
+.cart-preview h6 {
+    margin-top: 0;
+    font-weight: bold;
+}
+
+.cart-preview .item {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 8px;
+    padding-bottom: 4px;
+    font-size: 14px;
+}
+
+.cart-preview .item:last-child {
+    border: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.cart-preview .ver-carrito-link {
+    display: block;
+    text-align: right;
+    margin-top: 8px;
+}
+
+.cart-preview .item {
+    font-size: 14px;
+    border-bottom: 1px solid #eee;
+    padding: 6px 0;
+    display: flex;
+    align-items: center;
+}
+
+.cart-preview .item img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+.cart-preview .item a.btn-outline-danger {
+    margin-left: auto;
+    padding: 0 6px;
+    line-height: 1;
+}
+
+.cart-preview .item a.btn-outline-danger:hover {
+    background-color: #dc3545;
+    color: white;
+}
+.cart-preview .item a.btn-outline-danger:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.5);
+}
+.cart-preview .item a.btn-outline-danger:active {
+    background-color: #c82333;
+    color: white;
+}
+.cart-preview .item a.btn-outline-danger:active:focus {
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.5);
+}
+.cart-preview .item a.btn-outline-danger:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.5);
+}
+.cart-preview .item a.btn-outline-danger:focus-visible:active {
+    background-color: #c82333;
+    color: white;
+}
