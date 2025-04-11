@@ -11,6 +11,7 @@ ALLOWED_HOSTS = []  # Puedes dejarlo vacío en desarrollo local
 
 # Aplicaciones instaladas
 INSTALLED_APPS = [
+    'jazzmin',  # Debe estar antes de 'django.contrib.admin'
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -83,3 +84,18 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Campo por defecto para modelos
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+JAZZMIN_SETTINGS = {
+    "site_title": "Live Orgánica Admin",
+    "site_header": "Live Orgánica",
+    "site_brand": "Admin Live Orgánica",
+    "site_logo": "https://cdn-icons-png.freepik.com/512/10621/10621480.png",
+    "welcome_sign": "Bienvenido al panel de administración",
+    "show_ui_builder": True,  # Permite personalización visual desde el admin
+}
+
+# Configuración para contraseñas (en settings.py)
+PASSWORD_HASHERS = [
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.Argon2PasswordHasher',
+]

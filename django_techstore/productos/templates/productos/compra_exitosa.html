@@ -1,0 +1,35 @@
+{% include 'productos/menu.html' %}
+
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+            <div class="card shadow">
+                <div class="card-body p-5">
+                    <h1 class="display-4 text-success mb-4">¡Compra Exitosa!</h1>
+                    <i class="fas fa-check-circle fa-5x mb-4" style="color: #28a745;"></i>
+                    <h2 class="mb-4">Gracias por tu compra</h2>
+                    
+                    <div class="order-details mb-5">
+                        <h3>Detalles de tu orden</h3>
+                        <p><strong>Número de orden:</strong> #{{ orden.id }}</p>
+                        <p><strong>Fecha:</strong> {{ orden.fecha|date:"d/m/Y H:i" }}</p>
+                        <p><strong>Total:</strong> ${{ orden.total }}</p>
+                    </div>
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                        <a href="{% url 'index' %}" class="btn btn-primary btn-lg me-md-2">
+                            <i class="fas fa-home me-2"></i>Volver al inicio
+                        </a>
+                        <a href="{% url 'productos' %}" class="btn btn-outline-secondary btn-lg">
+                            <i class="fas fa-shopping-basket me-2"></i>Seguir comprando
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% include 'productos/footer.html' %}

@@ -4,7 +4,9 @@ from .models import Producto, Categoria
 from .models import Carrito
 
 from django.shortcuts import get_object_or_404, redirect
-from .models import Carrito, Producto
+from .models import Carrito, Producto, Orden
+from django.shortcuts import render, redirect
+from django.contrib import messages
 
 def index(request):
     categorias = Categoria.objects.all()
@@ -93,3 +95,26 @@ def disminuir_cantidad(request, producto_id):
         else:
             item.delete()
     return redirect('ver_carrito')
+ 
+def realizar_compra(request):
+    carrito_items = Carrito.objects.all()
+    total = sum(item.subtotal for item in carrito_items)
+
+    # Crear la orden
+    orden = Orden.objects.create(total=total)
+    for item in carrito_items:
+        orden.carrito.add(item)
+    
+    # Vaciar el carrito después de la compra
+    carrito_items.delete()
+
+    return redirect('compra_exitosa', orden_id=orden.id)  # Redirige a la página de compra exitosa
+
+def compra_exitosa(request, orden_id):
+    orden = get_object_or_404(Orden, id=orden_id)
+    return render(request, 'productos/compra_exitosa.html', {'orden': orden})
+
+
+
+
+

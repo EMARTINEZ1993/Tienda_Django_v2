@@ -1,6 +1,15 @@
 from django.urls import path
 from .views import index, detalle_producto,  lista_categorias, ofertas, productos, categoria, all_productos,buscar_productos, ver_carrito, agregar_al_carrito
 from .views import eliminar_del_carrito, vaciar_carrito,    aumentar_cantidad, disminuir_cantidad
+from .views import realizar_compra, compra_exitosa
+
+from django.urls import path
+from django.shortcuts import get_object_or_404, redirect
+from .models import Producto, Carrito, Orden
+from django.shortcuts import render, redirect
+from django.contrib import messages
+
+
 urlpatterns = [
     path('', index, name='index'),
     path('detalle/<int:id_producto>', detalle_producto, name='detalle_producto'),
@@ -16,6 +25,9 @@ urlpatterns = [
     path('carrito/vaciar/', vaciar_carrito, name='vaciar_carrito'),
     path('carrito/aumentar/<int:producto_id>/', aumentar_cantidad, name='aumentar_cantidad'),
     path('carrito/disminuir/<int:producto_id>/', disminuir_cantidad, name='disminuir_cantidad'),
+    path('realizar_compra/', realizar_compra, name='realizar_compra'),  # Nueva URL
+    path('compra_exitosa/<int:orden_id>/', compra_exitosa, name='compra_exitosa'),
+
 
 
 ]    
